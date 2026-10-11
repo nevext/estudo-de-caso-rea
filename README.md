@@ -21,7 +21,8 @@ Este é um estudo de caso independente, feito para fins de estudo, sem vínculo 
 | Item | Versão |
 | --- | --- |
 | REA (`rea-agents`) | 6.4.0, pelo terminal |
-| Ghidra | 12.1.4, em `C:\tools\ghidra_12.1.4_PUBLIC` |
+| Ghidra | 12.1.4, em `C:\tools\ghidra_12.1.4_PUBLIC` (variável de usuário `GHIDRA_INSTALL_DIR`) |
+| adb (platform-tools) | Baixado, ainda não extraído nem configurado (`REA_ADB_PATH`); só é preciso para testes em Android |
 | Java | 21.0.12 |
 | Node.js | 24.12.0 |
 | Compilador | gcc 15.2.0 (MSYS2 UCRT64) |
