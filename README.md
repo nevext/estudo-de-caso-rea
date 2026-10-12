@@ -403,6 +403,30 @@ Conferido com um teste automático no Chrome (mouse e teclado de verdade), sem e
 
 **Conclusão deste teste.** Para "clonar" uma funcionalidade de site, o REA serviu como olho: mostra com precisão o que existe na tela e em que estado. Quem reescreve é o agente. O resultado se parece no uso, não é uma cópia do original.
 
+## Teste com site: Overleaf
+
+Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
+
+### Página inicial (sem login)
+
+Mesma técnica do Canva: o usuário abriu `overleaf.com` no Chrome de depuração e o REA observou (`inspect_web_page` com texto de acessibilidade + `capture_web_screenshot`).
+
+**O que veio.** Como é uma página de conteúdo, e não um aplicativo, uma única captura trouxe a página inteira, de cima a baixo, mesmo com só o topo visível na tela: menu, formulário de cadastro, todos os títulos e listas das seções, planos, rodapé com seis colunas e o aviso de cookies. Foram 898 nós de acessibilidade, que viraram 383 linhas úteis.
+
+**O que não veio.**
+
+- Os itens dentro dos menus suspensos (Product, Solutions, Help & resources): estavam fechados, então não existem na árvore.
+- A aparência abaixo da primeira dobra: a foto é só do que está visível, e o REA não rola a página.
+- Vídeos e imagens: só o texto alternativo.
+
+**Diferença para o Canva.** Página de conteúdo se lê de uma vez. Aplicativo (editor) só mostra o estado atual e precisa de uma captura por estado.
+
+**O que foi construído.** `C:\dev\rea\results\overleaf\index.html`: página com as mesmas seções e o mesmo comportamento (menus, cadastro com validação, cookies, título animado), com nome, textos e ilustrações próprios. Não foram copiados logotipo, textos de marketing, logotipos de clientes nem depoimentos. Teste automático no Chrome passou, em tela grande e de celular.
+
+**Próximo passo.** Login, lista de projetos e editor, com o usuário logado.
+
+**Observação.** O código do editor do Overleaf é publicado como software livre (Community Edition, AGPL v3). Para a parte do editor, ler o código publicado é mais direto do que observar a tela.
+
 ## Plano: material em português
 
 O repositório do REA já tem um `README_pt-BR.md`, tradução do original. O que não existe é um material em português baseado em teste: o que funciona de verdade, em Windows, com números.
