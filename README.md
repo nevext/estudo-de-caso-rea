@@ -488,6 +488,30 @@ O usuário liberou confirmar as ações que antes só eram abertas, e trocou a i
 
 **Conclusão da rodada.** Confirmar a ação mostra o que a leitura do painel não mostra: o estado depois (interruptor ligado, etiqueta de componente, item de menu que troca de nome). É isso que orienta a reimplementação. O resultado em si, quando vem de IA, continua fora de alcance; o que se refaz é uma versão simples do mesmo efeito.
 
+### Sexta rodada no Canva: antes do login e página inicial (2026-10-12)
+
+Até aqui só o editor tinha sido refeito. O usuário pediu o que vem antes: a página pública, a entrada e a página inicial logada.
+
+**Testado.**
+
+- A página pública abriu sem bloqueio numa **janela sem conta do mesmo Chrome de depuração** (contexto novo criado pelo CDP, `Target.createBrowserContext`). O navegador isolado do REA continua levando 403; o Chrome de uma pessoa, mesmo sem login, não. Foi uma visita só, sem captcha.
+- `inspect_web_page` leu a página pública inteira de uma vez (cabeçalho, abas com 20 cartões, carrossel, rodapé com sete colunas, aviso de cookies), como tinha sido no Overleaf.
+- `capture_browser_scenario` em modo `connect` funcionou também nessa janela sem conta: clicou em "Log in" e depois em "Continue with email". Nada foi digitado.
+- Na aba logada foram lidas a página inicial, a janela Create, o menu da conta e a tela Projects, em quatro execuções curtas.
+- O servidor MCP do REA não conectou nesta sessão; tudo foi feito pela linha de comando (`rea inspect-web-page`, `rea capture-browser-scenario` com o JSON num arquivo), com o mesmo resultado.
+
+**O que se aprendeu sobre o método.**
+
+- `capture_web_screenshot` fica parado se a aba não estiver na frente. Ativar a aba (`/json/activate/<id>`) destrava.
+- O cenário do REA não tem ação de passar o mouse (as ações são `goto`, `click`, `fill`, `press`, `select_option`, `check`, `uncheck`, `wait_for`, `wait_for_timeout`). Os menus do cabeçalho público abrem no hover e ficaram sem leitura.
+- O cenário força o tema claro no navegador: a mesma página inicial veio escura na leitura passiva e clara no cenário. Cor e tema devem ser conferidos pela leitura passiva.
+- No resultado do cenário pela linha de comando, o texto de acessibilidade fica em `steps[n].artifacts.accessibility.value.text`, já em formato de lista indentada, bem menor que a árvore do `inspect_web_page`.
+- Limite do método: o passo depois do e-mail exige digitar numa tela de login, que é só do dono. Ficou como suposição.
+
+**O que foi construído.** Em `C:\dev\rea\results\canva`: página pública, janela de entrada em três passos, página inicial com atalhos, busca, designs recentes e modelos, janela "Criar um design", tela Projetos com pastas, estrela e lixeira, e a ligação com o editor (botão Início, título e miniatura voltando para as listas). Conta e designs ficam no navegador. Nome, textos e desenhos são próprios. Teste automático no Chrome passou em tela grande e de celular: 94 verificações.
+
+**Conclusão da rodada.** Com as três partes (pública, entrada, logada) o resultado passa a ser um produto que se percorre do começo ao fim, e não só uma ferramenta solta. O que separa do original deixou de ser tela e passou a ser servidor: contas, nuvem, equipes e biblioteca de conteúdo.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
