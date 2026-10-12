@@ -439,6 +439,28 @@ Seis estados dependiam de passar o mouse, clicar com o botão direito ou ter alg
 
 **O que entrou no módulo nesta rodada.** Menu de contexto completo com atalhos, copiar e colar estilo, link e texto alternativo nos elementos, notas com título, contador e tempo estimado, timer e modo de visualização. Fontes, cores, estilos de texto e recorte ficaram anotados na lista do que falta.
 
+### Quarta rodada no Canva: com a conta Pro (2026-10-12)
+
+O usuário assinou o Pro para testar se o acesso pago mudava o que o REA consegue ler. Mudou: os painéis que antes só mostravam a coroa passaram a abrir. Foram três execuções curtas no modo de conexão.
+
+**Testado.**
+
+- Painel Brand: busca, seletor de kit e onze seções (diretrizes, modelos, logotipos, cores, fontes, voz da marca, fotos, gráficos, ícones, tabelas e categorias novas). Estava vazio, então só a estrutura foi lida.
+- Painel Edit image: seleção por parte da imagem (tudo, elemento, área, primeiro plano, fundo, texto), ferramentas, Style Match, filtros, aplicativos e sombras.
+- Painel Adjust completo: balanço de branco, luz (6 controles), cor (inverter, vibração, saturação), ajuste por cor e textura (nitidez, clareza, vinheta). Cada controle tem deslizante e campo numérico, todos em 0.
+- Janela Resize: busca, sugestões, oito categorias, Magic Switch (traduzir, transformar em documento) e os botões "Copy & resize" e "Resize this design".
+
+**O que não deu.**
+
+- BG Remover: foi acionado e respondeu que não detectou fundo naquela imagem. O resultado de uma ferramenta de IA não é algo que a leitura da tela reproduz; vê-se a entrada e a saída, não o modelo.
+- Resize, Translate e Transform into Doc não foram confirmados: criam um design novo na conta, o que as regras de trabalho pedem para não fazer sem combinar.
+- Uma execução falhou porque o botão procurado não existe mais no Pro (a janela já abre direto nas opções). O plano de passos escrito para a conta grátis não serve para a paga: a tela muda com o plano.
+- Efeito colateral: cliques repetidos no painel de uploads deixaram imagens duplicadas no design de teste. Passos que criam conteúdo precisam ser os últimos de cada execução, e não devem ser repetidos quando ela falha.
+
+**O que entrou no módulo.** Painel Editar imagem (6 filtros, 5 ajustes, inverter, redefinir, sombra), cores da marca aplicáveis com um clique e tamanho personalizado. Tudo o que roda no servidor do Canva ficou na lista do que falta, marcado como não reproduzível no navegador.
+
+**Conclusão da rodada.** Pagar o plano ajuda a ler a interface (quais controles existem, com que nomes e limites), que é o que se reimplementa. Não ajuda a copiar o que o servidor faz.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
