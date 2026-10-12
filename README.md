@@ -403,6 +403,29 @@ Conferido com um teste automático no Chrome (mouse e teclado de verdade), sem e
 
 **Conclusão deste teste.** Para "clonar" uma funcionalidade de site, o REA serviu como olho: mostra com precisão o que existe na tela e em que estado. Quem reescreve é o agente. O resultado se parece no uso, não é uma cópia do original.
 
+### Segunda rodada no Canva: navegando sozinho (2026-10-12)
+
+Depois do Overleaf, o usuário pediu para voltar ao Canva usando o modo que clica. O navegador isolado continua barrado (403), mas na aba do Chrome dele, já logado, `capture_browser_scenario` em modo `connect` funcionou sem bloqueio.
+
+**O que foi lido em quatro rodadas.**
+
+| Rodada | Resultado |
+| --- | --- |
+| Painéis laterais | Texto, Fundo, Modelos, Elementos e Ferramentas |
+| Menus do topo | File e Resize; a rodada parou no terceiro menu |
+| Texto selecionado | Posição, Efeitos e Animar |
+| Texto selecionado | Aba Camadas, espaçamento e transparência |
+
+**Problemas.**
+
+- O menu Resize não fechou com Escape e travou o clique seguinte; o resto da rodada foi cancelado. Uma rodada que falha devolve o resultado inteiro de uma vez, bem maior.
+- O botão "Page options" só existe com o mouse em cima da miniatura; o clique por nome não o encontra.
+- Para ver painéis de elemento selecionado foi preciso criar um elemento. Dois textos foram adicionados ao design de teste do usuário, com o conhecimento dele.
+
+**O que entrou no módulo.** Efeitos de texto, animações com "aparecer ao clicar" e transições, aba Camadas, estados desligados dos botões de posição, trava de proporção, número de página, localizar e substituir, paleta de fundo e "usados recentemente".
+
+**Comparação com a primeira rodada.** Observando, cada estado custou uma ida e volta com o usuário (cinco estados em cerca de vinte minutos). Navegando, quatro rodadas de trinta segundos trouxeram doze painéis.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
