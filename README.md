@@ -461,6 +461,33 @@ O usuário assinou o Pro para testar se o acesso pago mudava o que o REA consegu
 
 **Conclusão da rodada.** Pagar o plano ajuda a ler a interface (quais controles existem, com que nomes e limites), que é o que se reimplementa. Não ajuda a copiar o que o servidor faz.
 
+### Quinta rodada no Canva: confirmando as ações (2026-10-12)
+
+O usuário liberou confirmar as ações que antes só eram abertas, e trocou a imagem de teste por uma figura sobre fundo preto. Foram catorze execuções curtas.
+
+**Testado, com resultado.**
+
+- BG Remover: removeu o fundo preto; o botão vira um interruptor ligado.
+- Expand: três tamanhos (livre, página inteira, 1:1); ao confirmar 1:1, quatro resultados para escolher, "gerar de novo", cancelar e concluir.
+- Copy & resize: escolher "Instagram Story" e confirmar criou um design novo na conta e mostrou o botão para abri-lo.
+- Create component: janela com nome sugerido, visibilidade (só neste design ou no kit de marca) e criar. Depois de criado, o elemento vira um grupo com a etiqueta "Component" e outra barra de ferramentas.
+- Copy page style: aviso "Style copied. Select to apply." e o item do menu passa a ser "Paste page style".
+- Lidos sem disparar: tamanho personalizado (largura, altura, unidade, trava de proporção, tamanhos salvos), Translate (idioma, páginas, no lugar ou em cópia) e Transform into Doc (campo livre e três sugestões).
+
+**O que se aprendeu sobre o método.**
+
+- O menu da página não precisa de mouse por cima: o clique com o botão direito na miniatura abre o mesmo menu. Na terceira rodada isso tinha sido dado como "só à mão"; estava errado.
+- Cada execução recarrega a página e perde a seleção. Ctrl+A no corpo da página seleciona de novo o elemento sem criar nada.
+- Caixa de seleção que só aparece ao passar o mouse falha no passo "marcar"; clicar no botão do item ao lado tem o mesmo efeito.
+- Pedir o texto de acessibilidade só no fim, e não a cada passo, deixa o retorno de uma execução que falha bem menor.
+- Limite real da ferramenta: enviar arquivo. O botão "Upload a font" foi achado, mas abre a janela de arquivos do sistema, e o cenário do REA não tem ação para escolher arquivo.
+
+**Efeitos na conta.** Ficaram um design novo (a cópia em formato Story), um componente no design de teste e dois textos soltos, além do fundo removido da imagem.
+
+**O que entrou no módulo.** Remover fundo liso no navegador (apaga a cor dos cantos a partir das bordas, guarda a original, restaura), aplicar a cor principal da imagem à página, e copiar e colar estilo de página. A remoção por IA, o Expand, a tradução e os componentes ficaram na lista do que falta.
+
+**Conclusão da rodada.** Confirmar a ação mostra o que a leitura do painel não mostra: o estado depois (interruptor ligado, etiqueta de componente, item de menu que troca de nome). É isso que orienta a reimplementação. O resultado em si, quando vem de IA, continua fora de alcance; o que se refaz é uma versão simples do mesmo efeito.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
