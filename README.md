@@ -512,6 +512,27 @@ Até aqui só o editor tinha sido refeito. O usuário pediu o que vem antes: a p
 
 **Conclusão da rodada.** Com as três partes (pública, entrada, logada) o resultado passa a ser um produto que se percorre do começo ao fim, e não só uma ferramenta solta. O que separa do original deixou de ser tela e passou a ser servidor: contas, nuvem, equipes e biblioteca de conteúdo.
 
+### Sétima rodada no Canva: remover fundo de qualquer foto (2026-10-12)
+
+O usuário cobrou: o "remover fundo" só funcionava com fundo liso, e o do Canva funciona em qualquer foto. A leitura da tela nunca mostrou como o Canva faz (é um modelo no servidor deles), então a saída foi procurar um modelo que rode no navegador e testar.
+
+**Testado nesta máquina**, em Chrome, com quatro fotos de fundo real (pessoa contra a luz, caneca numa mesa, cachorro num bosque, cachorro no chão):
+
+| Modelo | Licença | Tamanho | Tempo por foto (processador) | Resultado |
+| --- | --- | --- | --- | --- |
+| MODNet | Apache 2.0 | 25 MB | 1,8 s | Bom em pessoa e animal; na caneca apagou metade do objeto |
+| U-2-Netp | Apache 2.0 | 5 MB | 1,4 s | Bom em objeto e animal; na pessoa contra a luz sobrou só o rosto |
+| U-2-Net | Apache 2.0 | 168 MB | 3,5 s | Acertou as quatro |
+| BiRefNet lite, BEN2 | MIT | mais de 100 MB | não rodaram | Faltou memória no navegador, no processador e na placa de vídeo |
+
+Ficaram de fora sem teste, pela licença: RMBG-1.4 (uso não comercial) e ISNet (AGPL).
+
+**O que foi construído.** Um módulo opcional no editor (`ai-background.js`) que usa o U-2-Net com onnxruntime-web. O botão "Remover fundo" aparece ao lado do "Remover fundo liso". Pelo editor de verdade: 17 s na primeira foto (com o download do modelo) e menos de 4 s nas seguintes; "Restaurar fundo" devolve a original.
+
+**Limites.** A máscara tem 320 × 320 e é ampliada: a silhueta sai certa, mas cabelo solto e franjas ficam com borda macia. O primeiro uso precisa de internet para baixar o modelo. O do Canva continua melhor no detalhe.
+
+**Conclusão da rodada.** Um recurso que a observação deu como "roda no servidor deles, não se recria" foi recriado em parte com um modelo aberto rodando no navegador. O REA não ajudou nesse passo: ele mostra que o recurso existe e como se comporta, não como é feito.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
