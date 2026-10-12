@@ -360,18 +360,48 @@ O uso mais promissor, na avaliação feita na conversa, é o resgate de sistema 
 
 Feito em 2026-10-11. A ideia era apontar o REA para `canva.com` e trazer a funcionalidade de criar slides para outro projeto.
 
-**O que foi testado.** `capture_browser_scenario` do REA abrindo `https://www.canva.com/create/presentations/` num Chrome isolado (perfil temporário, sem login, sem janela).
+### Tentativa 1: navegador automático, sem login
 
-**Resultado.** O Canva respondeu 307 e depois **403**, com a página de bloqueio do Cloudflare (desafio Turnstile; título "Você vai poder voltar a criar designs em breve"). Nenhum código do editor chegou a ser carregado. O bloqueio não foi contornado.
+`capture_browser_scenario` abrindo `https://www.canva.com/create/presentations/` num Chrome isolado (perfil temporário, sem janela).
 
-**O que isso mostra.**
+**Resultado.** O Canva respondeu 307 e depois **403**, com a página de bloqueio do Cloudflare (desafio Turnstile; título "Você vai poder voltar a criar designs em breve"). Nenhum código do editor chegou a carregar. O bloqueio não foi contornado.
 
-- Site grande com proteção contra automação barra o navegador que o REA abre sozinho. O caminho que resta é o passivo: a pessoa abre o próprio Chrome com `--remote-debugging-port`, faz login, e o REA só observa (`list_browser_targets`, `inspect_web_page`). Isso não foi testado aqui.
-- Mesmo observando, o que sai é código minificado de terceiros. Serve para entender como funciona, não para copiar para outro projeto: o código, os templates e as imagens são do Canva.
+### Tentativa 2: observação passiva, com o usuário logado
 
-**O que foi entregue no lugar.** Um editor de slides escrito do zero, em `C:\dev\rea\results\canva\slide-creator` (JavaScript puro, sem dependências): texto, formas, imagens, mover/redimensionar/girar, guias de encaixe, temas, layouts, desfazer, apresentação, exportação em PNG/PDF/JSON. Conferido com um teste automático no Chrome (mouse e teclado de verdade), sem erros no console.
+Chrome aberto com `--remote-debugging-port=9222 --user-data-dir=C:\dev\chrome-rea` (perfil separado). O usuário fez o login e abriu o editor; o REA só observou a aba.
 
-**Hipótese, não testada.** Para clonar a *lógica* de um site, a parte difícil não é o REA ler o código, é o site deixar. Sites sem essa proteção, ou do próprio dono, devem funcionar pelo modo automático.
+**Funcionou.** Com uma pessoa de verdade no navegador, o Cloudflare não barrou. Ferramentas usadas: `list_browser_targets`, `inspect_web_page` (com `include_accessibility_text`) e `capture_web_screenshot`.
+
+**O que o REA entrega nesse modo.** A árvore de acessibilidade da página: todos os controles visíveis, com papel, nome e estado. Junto com a foto da tela, isso dá o inventário da interface. O que foi lido:
+
+| Estado na tela | O que apareceu |
+| --- | --- |
+| Editor vazio (A4) | Barra de cima (Home, File, Resize, Editing, salvo, título, Share), abas do painel lateral, grade de templates, Add page, rodapé (Notes, Timer, zoom, Pages, Grid view, tela cheia) |
+| Apresentação, painel Shapes | Categorias com "See all" (Lines, Basic shapes, Polygons, Stars, Arrows, Flowchart, Speech bubbles...), faixa de miniaturas com "+" e menu de tipo de página, botão Present com menu de modos |
+| Texto selecionado | Barra: fonte, tamanho com − e +, cor, negrito, itálico, sublinhado, tachado, maiúsculas, alinhamento, lista, espaçamento, transparência, Effects, Animate, Position. 6 alças (cantos e laterais) e girar embaixo. Barrinha flutuante |
+| Quadrado selecionado | Barra: Edit, cor (cinza `#919191`), borda, cantos, transparência, Effects, Animate, Position. 8 alças. Barrinha: Comment, Lock, Duplicate, Delete, More |
+| Imagem selecionada | Barra: Edit, Replace, BG Remover, Eraser, cor, borda, cantos, Crop, Flip, transparência, Animate, Position |
+| Painel Uploads | Busca, Upload files, abas Images/Videos/Designs/Folders/Files, grade com as imagens enviadas |
+
+**Limites encontrados.**
+
+- Só aparece o que está na tela. Cada estado (texto selecionado, forma selecionada...) precisou que o usuário deixasse a tela daquele jeito e avisasse. Janela do Windows (escolher arquivo) fica de fora.
+- O modo é passivo: o REA não clica. O ritmo depende de quem está no navegador.
+- As respostas são grandes (de 280 mil a 1 milhão de caracteres por captura). Foi preciso filtrar o JSON por script antes de ler.
+- O que sai é a estrutura da interface, não a lógica interna. O código do editor não foi lido nem copiado; é minificado e do Canva.
+
+### O que foi construído
+
+Um editor de slides escrito do zero em `C:\dev\rea\results\canva\slide-creator` (JavaScript puro, sem dependências), em duas voltas:
+
+1. Antes do login: feito só com o que se sabe de editores desse tipo.
+2. Depois da observação: interface refeita seguindo o inventário acima (barra de propriedades por tipo, barrinha flutuante, alças, painel de formas por categoria, Uploads, Posição, rodapé com zoom/páginas/grade, bloqueio, menu de contexto).
+
+Conferido com um teste automático no Chrome (mouse e teclado de verdade), sem erros no console.
+
+**O que não veio e não dá para trazer assim:** templates, fotos, kit de marca, efeitos, animações, recorte, remoção de fundo, apps de IA, comentários e compartilhamento. Parte é conteúdo do Canva, parte roda no servidor deles.
+
+**Conclusão deste teste.** Para "clonar" uma funcionalidade de site, o REA serviu como olho: mostra com precisão o que existe na tela e em que estado. Quem reescreve é o agente. O resultado se parece no uso, não é uma cópia do original.
 
 ## Plano: material em português
 
