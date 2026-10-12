@@ -426,6 +426,19 @@ Depois do Overleaf, o usuário pediu para voltar ao Canva usando o modo que clic
 
 **Comparação com a primeira rodada.** Observando, cada estado custou uma ida e volta com o usuário (cinco estados em cerca de vinte minutos). Navegando, quatro rodadas de trinta segundos trouxeram doze painéis.
 
+### Terceira rodada no Canva: o que só a mão alcança (2026-10-12)
+
+Seis estados dependiam de passar o mouse, clicar com o botão direito ou ter algo selecionado. O usuário abriu cada um e o REA leu de forma passiva: opções de página, menu de contexto do elemento, painel de fontes (com a aba de estilos de texto), painel de cores, modo de recorte e menu Editing.
+
+**O que se aprendeu sobre o método.**
+
+- A foto mostra o que é pago: os itens Pro têm uma coroa ao lado. O texto de acessibilidade não traz essa marca; só a imagem resolve.
+- O texto de acessibilidade traz o painel inteiro, inclusive o que está abaixo da parte visível. Não foi preciso rolar a lista de fontes nem a de cores, e os códigos das 28 cores e dos 21 gradientes padrão vieram escritos.
+- Listas que carregam aos poucos vêm incompletas: das fontes populares só apareceram quatro.
+- O melhor arranjo foi misto: o REA navega sozinho onde um clique simples basta, e a pessoa abre o que exige gesto. Seis estados levaram cerca de dez minutos.
+
+**O que entrou no módulo nesta rodada.** Menu de contexto completo com atalhos, copiar e colar estilo, link e texto alternativo nos elementos, notas com título, contador e tempo estimado, timer e modo de visualização. Fontes, cores, estilos de texto e recorte ficaram anotados na lista do que falta.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
