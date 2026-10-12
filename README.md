@@ -488,6 +488,10 @@ Feito em 2026-10-11 e 2026-10-12. O usuário fez o login; o REA navegou sozinho 
 
 **O que ficou de fora**, por depender de contas e de servidor: compartilhamento, comentários, controle de alterações, chat, histórico, integrações e IA. Também não há editor visual.
 
+**Correção depois de comparar lado a lado (2026-10-12).** O usuário mandou duas fotos: o editor recriado e o original. O painel do PDF usava o leitor embutido do Chrome (barra escura, miniaturas) e ficou bem diferente. Foi trocado por um visualizador próprio com a PDF.js, a mesma biblioteca aberta que o original usa: páginas direto no painel, com página atual e zoom. Lição: a estrutura lida pelo REA dizia quais botões existem na barra do PDF, mas só a comparação visual mostrou que o painel inteiro estava errado.
+
+**Lista do que falta.** O README do projeto ganhou a seção "O que falta para ficar igual ao Overleaf", com dez áreas: contas, colaboração, histórico, editor, compilação, projetos, integrações e IA, pagamento, site público e o que nunca será igual.
+
 **Resumo do caso Overleaf.** Em dois dias: 23 páginas, um servidor de compilação e um editor que gera PDF. A parte pública se recria pela estrutura; o conteúdo (clientes, números, textos) não. A parte logada se recria como ferramenta de uma pessoa só; o que faz o original ser colaborativo é servidor, e isso a tela não mostra.
 
 **Observação.** O código do editor do Overleaf é publicado como software livre (Community Edition, AGPL v3). Para a parte do editor, ler o código publicado é mais direto do que observar a tela.
