@@ -464,7 +464,31 @@ Os 12 tipos de documento de exemplo compilam. Erro de LaTeX volta como resposta 
 
 **O que a leitura da estrutura não resolve.** Em página de produto, quase tudo é conteúdo do dono: números, clientes, depoimentos, certificações, publicações, texto jurídico. O REA mostra onde cada coisa fica; o conteúdo em si não se recria. Essas partes ficaram como marcadores. Blog, central de ajuda e termos são só esqueleto.
 
-**Próximo passo.** Com o usuário logado: lista de projetos e editor.
+### Parte logada: lista de projetos e editor
+
+Feito em 2026-10-11 e 2026-10-12. O usuário fez o login; o REA navegou sozinho numa aba própria do Chrome dele (`capture_browser_scenario` em modo `connect`), só abrindo menus e painéis.
+
+**O que foi lido.**
+
+| Tela | Passos | O que veio |
+| --- | --- | --- |
+| Lista de projetos | 10 | Barra lateral, tabela, menus Novo projeto, Ajuda e Conta |
+| Editor, visão geral | 2 | Barra de menus, abas laterais, árvore de arquivos, sumário, barra de ferramentas, PDF |
+| Editor, menus e painéis | 26 | File, Edit, Insert, View, Format, opções do título, de layout e de compilação, quatro painéis laterais, janela de configurações |
+
+**Problemas e como foram resolvidos.**
+
+- A rodada de 26 passos com foto passou de 10 MB e estourou o limite de resposta do MCP. O REA avisou que a análise estava guardada; `export_evidence_bundle` gravou tudo em arquivo (27 MB) e o registro foi separado por script.
+- Para ver o conteúdo de um menu, bastou comparar o texto de acessibilidade de antes e de depois do clique: as linhas novas são o menu.
+- Botões com o mesmo nome em lugares diferentes (dois "Help") travariam a rodada; ficaram de fora.
+
+**Limite desta leitura.** O REA mostrou tudo o que o editor oferece, mas não como ele funciona por dentro: a sincronização em tempo real, o editor visual e a ligação entre código e PDF não aparecem na estrutura da tela.
+
+**O que foi construído.** Lista de projetos e editor funcionando, com projetos guardados no navegador e compilação de verdade pelo Tectonic (agora com vários arquivos, subpastas, imagens e bibliografia). Teste de ponta a ponta: criar projeto, digitar, compilar, provocar e consertar um erro de LaTeX, enviar imagem, buscar, baixar o .zip, arquivar, lixeira.
+
+**O que ficou de fora**, por depender de contas e de servidor: compartilhamento, comentários, controle de alterações, chat, histórico, integrações e IA. Também não há editor visual.
+
+**Resumo do caso Overleaf.** Em dois dias: 23 páginas, um servidor de compilação e um editor que gera PDF. A parte pública se recria pela estrutura; o conteúdo (clientes, números, textos) não. A parte logada se recria como ferramenta de uma pessoa só; o que faz o original ser colaborativo é servidor, e isso a tela não mostra.
 
 **Observação.** O código do editor do Overleaf é publicado como software livre (Community Edition, AGPL v3). Para a parte do editor, ler o código publicado é mais direto do que observar a tela.
 
