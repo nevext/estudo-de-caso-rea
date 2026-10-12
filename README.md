@@ -423,7 +423,31 @@ Mesma técnica do Canva: o usuário abriu `overleaf.com` no Chrome de depuraçã
 
 **O que foi construído.** `C:\dev\rea\results\overleaf\index.html`: página com as mesmas seções e o mesmo comportamento (menus, cadastro com validação, cookies, título animado), com nome, textos e ilustrações próprios. Não foram copiados logotipo, textos de marketing, logotipos de clientes nem depoimentos. Teste automático no Chrome passou, em tela grande e de celular.
 
-**Próximo passo.** Login, lista de projetos e editor, com o usuário logado.
+### Modo automático: o REA navegando sozinho
+
+Depois de abrir tela por tela à mão, o usuário perguntou se o REA não podia fazer isso sozinho. Pode: `capture_browser_scenario` em modo `launch` abre um Chrome isolado, segue uma lista de ações (`goto`, `click`, `wait`) e devolve, a cada passo, o endereço, a foto e o texto de acessibilidade.
+
+**Resultado.** O Overleaf não barrou o navegador automático (o Canva tinha barrado). Em três rodadas, de 8 a 10 segundos cada, foram lidas 22 páginas públicas: início, preços, login, cadastro, redefinir senha, SSO, recursos, IA, por que LaTeX, detalhe de modelo, as quatro de soluções, histórias de clientes, sobre, contato, blog, aprenda e termos.
+
+**Diferenças para o modo passivo.**
+
+- O texto de acessibilidade vem pronto e legível (formato de árvore, com o endereço de cada link). No modo passivo vinha como lista de nós e precisava de script para montar.
+- Dá para clicar em menus (o item "AI" foi achado clicando em Product, sem saber o endereço).
+- Uma rodada com 10 páginas e fotos passa de 2 milhões de caracteres; continua sendo preciso separar por passo em arquivos.
+
+**Comparando os três jeitos testados.**
+
+| Jeito | Canva | Overleaf |
+| --- | --- | --- |
+| Automático, navegador isolado | Barrado (403) | Funcionou |
+| Passivo, usuário logado | Funcionou | Funcionou |
+| Automático na aba do usuário | Não testado | Autorizado, ainda não usado |
+
+**O que foi construído nesta rodada.** Em `C:\dev\rea\results\overleaf`: galeria de modelos com página de categoria e de detalhe, preços (chaves anual/estudante, licenças de grupo, tabela comparativa), login, cadastro, redefinição de senha e SSO. Preços, modelos e textos são próprios. Testes automáticos passaram em tela grande e de celular.
+
+**Regras combinadas.** O usuário autorizou o uso de uma aba própria no Chrome dele, com o login sempre feito por ele. As regras ficaram em `C:\dev\rea\results\RULES.md`.
+
+**Próximo passo.** Páginas de conteúdo que faltam (recursos, soluções, blog) e, com o usuário logado, lista de projetos e editor.
 
 **Observação.** O código do editor do Overleaf é publicado como software livre (Community Edition, AGPL v3). Para a parte do editor, ler o código publicado é mais direto do que observar a tela.
 
