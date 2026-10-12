@@ -447,7 +447,24 @@ Depois de abrir tela por tela à mão, o usuário perguntou se o REA não podia 
 
 **Regras combinadas.** O usuário autorizou o uso de uma aba própria no Chrome dele, com o login sempre feito por ele. As regras ficaram em `C:\dev\rea\results\RULES.md`.
 
-**Próximo passo.** Páginas de conteúdo que faltam (recursos, soluções, blog) e, com o usuário logado, lista de projetos e editor.
+### Fechando a parte pública
+
+**Compilador.** A máquina não tinha LaTeX. Foi instalado o Tectonic 0.17.0 (um executável só, em `C:\tools\tectonic`), com autorização do usuário. Um servidor em Node recebe o `.tex` e devolve o PDF. Medido aqui:
+
+| Compilação | Tempo |
+| --- | --- |
+| Primeira de todas (baixa o pacote básico) | 2 min 14 s |
+| Primeira com Beamer (baixa a classe) | 83 s |
+| Demais, primeira vez de cada documento | 0,5 a 4 s |
+| Repetida (cache) | 1 ms |
+
+Os 12 tipos de documento de exemplo compilam. Erro de LaTeX volta como resposta 422 com o log.
+
+**Páginas de conteúdo.** As 13 que faltavam foram geradas a partir da estrutura lida pelo REA: recursos, IA, por que LaTeX, quatro de soluções, histórias, sobre, contato, blog, aprenda e termos. Total: 21 páginas, 58 links internos conferidos por teste.
+
+**O que a leitura da estrutura não resolve.** Em página de produto, quase tudo é conteúdo do dono: números, clientes, depoimentos, certificações, publicações, texto jurídico. O REA mostra onde cada coisa fica; o conteúdo em si não se recria. Essas partes ficaram como marcadores. Blog, central de ajuda e termos são só esqueleto.
+
+**Próximo passo.** Com o usuário logado: lista de projetos e editor.
 
 **Observação.** O código do editor do Overleaf é publicado como software livre (Community Edition, AGPL v3). Para a parte do editor, ler o código publicado é mais direto do que observar a tela.
 
