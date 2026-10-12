@@ -585,6 +585,21 @@ Entraram também os dois aplicativos que tinham ficado de fora na rodada 8:
 
 **O que se aprendeu.** Do que o plano pago oferece, uma parte é só código no navegador (kit de marca, cópia em outro formato, exportação), uma parte é modelo pequeno que roda no navegador (fundo, melhorar, colorir) e o resto é serviço: conteúdo licenciado, modelo gerador, integração com redes sociais. A terceira parte não se recria olhando a tela nem escrevendo código.
 
+### Décima rodada no Canva: botão Claude e vídeo (2026-10-12)
+
+Esta rodada não usou o REA: nada foi lido do original. É uma função própria, que o Canva não tem nesse formato.
+
+O que foi feito:
+
+- Botão **Claude** no editor. Com uma chave da API da Anthropic, monta páginas a partir de um pedido, reescreve o texto selecionado e escolhe tempo, transição e entradas para o vídeo. Sem chave, nenhuma chamada sai do navegador.
+- **Baixar › Vídeo com as animações**: grava as páginas animadas no próprio navegador, sem servidor e sem ffmpeg.
+
+Testado (20 verificações no Chrome): todo o caminho do botão com a API simulada pelo teste, e o vídeo de verdade (3 páginas, MP4 de 1280 × 720, 6 s, aberto no navegador e com a imagem mudando entre os quadros).
+
+Não testado: o botão com a API de verdade, porque não há chave. Os nomes dos modelos, a aceitação da chamada direta do navegador e a qualidade das respostas são hipótese até alguém pôr uma chave.
+
+A lista do que falta fazer está no README do site, em "O que é para fazer ainda".
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
