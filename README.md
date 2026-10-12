@@ -560,6 +560,31 @@ O usuário mostrou o painel "Your apps" do Canva (DepthText, Trippy, Pixelify, S
 
 **O que se aprendeu.** O que no Canva é "aplicativo" se divide em três grupos: efeito de imagem puro (minutos para refazer), modelo pequeno de visão (roda no navegador, com download na primeira vez) e modelo gerador (fica no servidor). A placa de vídeo pelo navegador muda a conta: o mesmo modelo foi 17 vezes mais rápido.
 
+### Nona rodada no Canva: o que o plano pago dá (2026-10-12)
+
+O usuário trouxe uma lista do que se ganha no plano pago do Canva e pediu o que desse para fazer. Nada desta rodada veio de leitura pelo REA: a lista é dele, e o que foi construído segue o que cada item diz que faz.
+
+| Item da lista | Situação | Como |
+| --- | --- | --- |
+| Remoção de fundo | Já havia | Rodada 7 |
+| Kit de marca (cores, fontes, logos) | Feito | Tela Marca; o kit entra em todo design ao abrir |
+| Biblioteca premium | Não feito | É conteúdo licenciado; fica para depois, com um banco de imagens livre |
+| Redimensionamento em um clique | Feito | Cópia em outro formato, pelo cartão do design e pelo editor |
+| Armazenamento e pastas | Feito em parte | Os designs saíram do localStorage (5 MB) para o IndexedDB (10,7 GB disponíveis nesta máquina); pastas já havia; pasta compartilhada depende de servidor |
+| Exportação avançada | Feito em parte | PNG, JPEG, WebP e PDF em arquivo, resolução até 4x, compressão, fundo transparente em PNG e WebP; PDF com fundo transparente não |
+| IA que gera texto e imagem | Não feito | Modelo grande, em servidor |
+| Agendamento de postagens | Não feito | Depende de servidor e das redes sociais |
+| Vídeo | Não feito | O editor não tem vídeo |
+
+Entraram também os dois aplicativos que tinham ficado de fora na rodada 8:
+
+- **Colorir.** DDColor tiny (Apache 2.0, 135 MB) no navegador: 7 s por foto no processador. O modelo só prevê a cor numa grade de 512 × 512; a luminosidade vem da foto, então a nitidez não muda. Testado em duas fotos convertidas para preto e branco: grama verde, cobertor rosado, caneca avermelhada.
+- **Texto em curva.** Arco para cima ou para baixo, igual na tela (SVG) e no PNG (letra por letra no canvas).
+
+**Testado.** 17 verificações do kit de marca, cópias, exportação e migração, mais as de curva e de colorir, todas em Chrome. O PDF gerado foi aberto e desenhado pelo pdf.js.
+
+**O que se aprendeu.** Do que o plano pago oferece, uma parte é só código no navegador (kit de marca, cópia em outro formato, exportação), uma parte é modelo pequeno que roda no navegador (fundo, melhorar, colorir) e o resto é serviço: conteúdo licenciado, modelo gerador, integração com redes sociais. A terceira parte não se recria olhando a tela nem escrevendo código.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
