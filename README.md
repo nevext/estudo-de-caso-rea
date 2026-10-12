@@ -356,6 +356,23 @@ O uso mais promissor, na avaliação feita na conversa, é o resgate de sistema 
 
 **O que falta para testar.** Um programa antigo de verdade, com dados de exemplo. O `.exe` real analisado neste estudo (um desinstalador) era feito em Delphi e abriu sem problema, mas não é um sistema com dados.
 
+## Teste com site: editor de slides do Canva
+
+Feito em 2026-10-11. A ideia era apontar o REA para `canva.com` e trazer a funcionalidade de criar slides para outro projeto.
+
+**O que foi testado.** `capture_browser_scenario` do REA abrindo `https://www.canva.com/create/presentations/` num Chrome isolado (perfil temporário, sem login, sem janela).
+
+**Resultado.** O Canva respondeu 307 e depois **403**, com a página de bloqueio do Cloudflare (desafio Turnstile; título "Você vai poder voltar a criar designs em breve"). Nenhum código do editor chegou a ser carregado. O bloqueio não foi contornado.
+
+**O que isso mostra.**
+
+- Site grande com proteção contra automação barra o navegador que o REA abre sozinho. O caminho que resta é o passivo: a pessoa abre o próprio Chrome com `--remote-debugging-port`, faz login, e o REA só observa (`list_browser_targets`, `inspect_web_page`). Isso não foi testado aqui.
+- Mesmo observando, o que sai é código minificado de terceiros. Serve para entender como funciona, não para copiar para outro projeto: o código, os templates e as imagens são do Canva.
+
+**O que foi entregue no lugar.** Um editor de slides escrito do zero, em `C:\dev\rea\results\canva\slide-creator` (JavaScript puro, sem dependências): texto, formas, imagens, mover/redimensionar/girar, guias de encaixe, temas, layouts, desfazer, apresentação, exportação em PNG/PDF/JSON. Conferido com um teste automático no Chrome (mouse e teclado de verdade), sem erros no console.
+
+**Hipótese, não testada.** Para clonar a *lógica* de um site, a parte difícil não é o REA ler o código, é o site deixar. Sites sem essa proteção, ou do próprio dono, devem funcionar pelo modo automático.
+
 ## Plano: material em português
 
 O repositório do REA já tem um `README_pt-BR.md`, tradução do original. O que não existe é um material em português baseado em teste: o que funciona de verdade, em Windows, com números.
