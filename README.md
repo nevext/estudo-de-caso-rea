@@ -533,6 +533,33 @@ Ficaram de fora sem teste, pela licença: RMBG-1.4 (uso não comercial) e ISNet 
 
 **Conclusão da rodada.** Um recurso que a observação deu como "roda no servidor deles, não se recria" foi recriado em parte com um modelo aberto rodando no navegador. O REA não ajudou nesse passo: ele mostra que o recurso existe e como se comporta, não como é feito.
 
+### Oitava rodada no Canva: os aplicativos de imagem (2026-10-12)
+
+O usuário mostrou o painel "Your apps" do Canva (DepthText, Trippy, Pixelify, Slice, Image Enhancer, Tracer, Product Background, os de vídeo) e pediu os mesmos. Só a lista foi vista, por uma captura de tela dele; os aplicativos não foram abertos pelo REA. O que cada um faz veio do nome e do ícone, então o comportamento aqui é interpretação, não cópia.
+
+**Testado nesta máquina.**
+
+- Super-resolução no navegador (Swin2SR 4x para fotos reais, Apache 2.0, 53 MB): uma foto de 225 × 150 levou 39 s no processador e 2,2 s na placa de vídeo (WebGPU), com resultado visivelmente mais nítido que a ampliação comum.
+- A versão leve 2x levou 6 s no processador; não foi adotada.
+- Pelo editor, com o download do modelo: 11 s para a mesma foto.
+
+**O que foi construído no editor.**
+
+| Aplicativo do Canva | Aqui | Como |
+| --- | --- | --- |
+| Image Enhancer | Melhorar imagem | Modelo no navegador, em pedaços de 192 px, placa de vídeo quando há |
+| Pixelify | Pixelizar | Canvas |
+| Slice | Fatiar | Canvas |
+| Trippy | Glitch | Canvas (canais de cor separados e linhas onduladas) |
+| Tracer / Vectorizer | Vetorizar | Biblioteca de traçado de domínio público; sai SVG |
+| DepthText | Texto atrás da figura | Recorte por modelo, com o texto entre a foto e a figura |
+| Product Background / Replace Background | Trocar fundo por cor | Recorte por modelo e cor; não gera cenário |
+| Easy Reflection | Reflexo | Canvas |
+
+**Ficaram de fora.** Product Studio e cenários gerados (modelo gerador grande, não roda no navegador), Colorize (não foi testado nenhum modelo), TypeStudio e TypeCraft (o texto do editor é reto; curvar exige refazer o desenho e a exportação do texto) e os três de vídeo (o editor não tem vídeo).
+
+**O que se aprendeu.** O que no Canva é "aplicativo" se divide em três grupos: efeito de imagem puro (minutos para refazer), modelo pequeno de visão (roda no navegador, com download na primeira vez) e modelo gerador (fica no servidor). A placa de vídeo pelo navegador muda a conta: o mesmo modelo foi 17 vezes mais rápido.
+
 ## Teste com site: Overleaf
 
 Começado em 2026-10-11. Objetivo: recriar o site tela por tela, começando pelo que aparece antes do login.
